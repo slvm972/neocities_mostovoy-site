@@ -1,0 +1,110 @@
+/* ============================================
+   KO-FI ПЛАВАЮЧА КНОПКА - ДОПОВНЕННЯ ДО STYLE.CSS
+   ============================================ */
+
+/* Контейнер для Ko-fi віджета */
+#kofi-widget-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  opacity: 0.85;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* При наведенні - повна непрозорість */
+#kofi-widget-container:hover {
+  opacity: 1;
+  transform: translateY(-3px);
+}
+
+/* Налаштування віджета Ko-fi */
+#kofi-widget-container img.kofiimg {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  transition: box-shadow 0.3s ease !important;
+}
+
+#kofi-widget-container:hover img.kofiimg {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* RTL (іврит) - кнопка зліва */
+html[dir="rtl"] #kofi-widget-container {
+  right: auto;
+  left: 20px;
+}
+
+/* ============================================
+   АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ
+   ============================================ */
+
+@media (max-width: 768px) {
+  #kofi-widget-container {
+    bottom: 15px;
+    right: 15px;
+    transform: scale(0.9);
+  }
+  
+  html[dir="rtl"] #kofi-widget-container {
+    left: 15px;
+    right: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  #kofi-widget-container {
+    bottom: 10px;
+    right: 10px;
+    transform: scale(0.85);
+    opacity: 0.75;
+  }
+  
+  #kofi-widget-container:hover {
+    opacity: 0.95;
+  }
+  
+  html[dir="rtl"] #kofi-widget-container {
+    left: 10px;
+    right: auto;
+  }
+}
+
+/* ============================================
+   УНИКНЕННЯ КОНФЛІКТІВ З КОНТЕНТОМ
+   ============================================ */
+
+/* Додаємо padding знизу для body, щоб контент не перекривався */
+body {
+  padding-bottom: 80px;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 70px;
+  }
+}
+
+/* При відкритих модальних вікнах - ховаємо кнопку */
+body.modal-open #kofi-widget-container {
+  display: none;
+}
+
+/* ============================================
+   АНІМАЦІЯ ПОЯВИ
+   ============================================ */
+
+@keyframes kofi-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 0.85;
+    transform: translateY(0);
+  }
+}
+
+#kofi-widget-container {
+  animation: kofi-fade-in 0.6s ease-out 1s both;
+}

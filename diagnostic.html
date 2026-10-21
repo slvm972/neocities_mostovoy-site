@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔍 Діагностика завантаження модулів</title>
+  <style>
+    body {
+      font-family: monospace;
+      padding: 20px;
+      background: #1e1e1e;
+      color: #d4d4d4;
+    }
+    .test-result {
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 4px;
+    }
+    .success {
+      background: #0e3a0e;
+      color: #4ec94e;
+    }
+    .error {
+      background: #3a0e0e;
+      color: #ff6b6b;
+    }
+    .warning {
+      background: #3a3a0e;
+      color: #ffdd57;
+    }
+    pre {
+      background: #2d2d2d;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🔍 Діагностика модулів сайту</h1>
+<div id="results"></div>
+
+<!-- Завантажуємо скрипти в правильному порядку -->
+<script src="utils.js"></script>
+<script src="translations.js"></script>
+<script src="audioPlayer.js"></script>
+<script src="languageManager.js"></script>
+<script src="mediaManager.js"></script>
+<script src="modalManager.js"></script>
+<script src="uiManager.js"></script>
+<script src="main.js"></script>
+
+<script>
+// Діагностичний скрипт
+(function diagnostic() {
+  const results = document.getElementById('results');
+  
+  function log(message, type = 'info') {
+    const div = document.createElement('div');
+    div.className = `test-result ${type}`;
+    div.textContent = message;
+    results.appendChild(div);
+  }
+  
+  function testFunction(name, fn) {
+    if (typeof fn === 'function') {
+      log(`✅ ${name} - функція доступна`, 'success');
+      return true;
+    } else {
+      log(`❌ ${name} - НЕ ЗНАЙДЕНО`, 'error');
+      return false;
+    }
+  }
+  
+  function testObject(name, obj, methods = []) {
+    if (typeof obj === 'undefined') {
+      log(`❌ ${name} - об'єкт НЕ ВИЗНАЧЕНО`, 'error');
+      return false;
+    }
+    
+    log(`✅ ${name} - об'єкт визначено`, 'success');
+    
+    let allMethodsOk = true;
+    methods.forEach(method => {
+      if (typeof obj[method] === 'function') {
+        log(`  ✓ ${name}.${method}() - OK`, 'success');
+      } else {
+        log(`  ✗ ${name}.${method}() - ВІДСУТНІЙ`, 'error');
+        allMethodsOk = false;
+      }
+    });
+    
+    return allMethodsOk;
+  }
+  
+  log('=== ПЕРЕВІРКА УТИЛІТ ===');
+  testFunction('extractYouTubeId', extractYouTubeId);
+  testFunction('createYouTubeEmbed', createYouTubeEmbed);
+  testFunction('isValidYouTubeId', isValidYouTubeId);
+  testFunction('escapeHtml', escapeHtml);
+  
+  log('\n=== ПЕРЕВІРКА КОНФІГУРАЦІЇ ===');
+  if (typeof translations !== 'undefined') {
+    log(`✅ translations - завантажено (${Object.keys(translations).length} мов)`, 'success');
+  } else {
+    log('❌ translations - НЕ ЗАВАНТАЖЕНО', 'error');
+  }
+  
+  log('\n=== ПЕРЕВІРКА АУДІОПЛЕЄРА ===');
+  testObject('AudioPlayer', AudioPlayer, ['createPlayer', 'createPoemButton', 'togglePlay']);
+  
+  log('\n=== ПЕРЕВІРКА МЕНЕДЖЕРІВ ===');
+  testObject('LanguageManager', LanguageManager, ['init', 'switchLanguage', 'get', 'getStihiLink']);
+  testObject('MediaManager', MediaManager, [
+    'loadData',
+    'renderNews',
+    'renderMusicModal',
+    'renderVideoModal',
+    'loadCollectionFilter',
+    'renderPoetryModal'
+  ]);
+  testObject('ModalManager', ModalManager, ['init', 'openModal', 'closeModal', 'openMusicModal', 'openVideoModal', 'openPoetryModal']);
+  testObject('UIManager', UIManager, ['init', 'renderLanguageButtons', 'switchLanguage']);
+  
+  log('\n=== ПЕРЕВІРКА DOM ЕЛЕМЕНТІВ ===');
+  const elements = [
+    'musicModalList',
+    'videoModalList',
+    'poetryListContainer',
+    'newsContent',
+    'langButtons'
+  ];
+  
+  elements.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      log(`✅ #${id} - знайдено`, 'success');
+    } else {
+      log(`⚠️ #${id} - НЕ ЗНАЙДЕНО (може бути на головній сторінці)`, 'warning');
+    }
+  });
+  
+  log('\n=== ТЕСТ MEDIAMANAGER ===');
+  if (typeof MediaManager !== 'undefined' && MediaManager.data) {
+    const pre = document.createElement('pre');
+    pre.textContent = JSON.stringify({
+      poetry: MediaManager.data.poetry?.length || 0,
+      tracks: MediaManager.data.tracks?.length || 0,
+      videos: MediaManager.data.videos?.length || 0,
+      news: MediaManager.data.news?.length || 0
+    }, null, 2);
+    results.appendChild(pre);
+  }
+  
+  log('\n=== РЕЗУЛЬТАТ ===');
+  const errors = document.querySelectorAll('.error').length;
+  if (errors === 0) {
+    log('🎉 ВСІ МОДУЛІ ЗАВАНТАЖЕНІ КОРЕКТНО!', 'success');
+  } else {
+    log(`⚠️ Знайдено ${errors} помилок. Перевірте консоль браузера (F12).`, 'error');
+  }
+})();
+</script>
+
+</body>
+</html>

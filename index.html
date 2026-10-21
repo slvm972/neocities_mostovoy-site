@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Слава Мостовий: Вірші, Музика, Відео</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="3.ico">
+  
+  <!-- Preconnect для критичних ресурсів -->
+  <link rel="preconnect" href="https://mostovoy.goatcounter.com">
+  <link rel="dns-prefetch" href="https://www.youtube.com">
+  <link rel="dns-prefetch" href="https://w.soundcloud.com">
+  
+  <!-- Preload критичного фону -->
+  <link rel="preload" as="image" href="https://s1.hostingkartinok.com/uploads/images/2024/06/f1c0b6d6eb074470c17b4362cd757fd2.jpg" fetchpriority="high">
+  
+  <!-- ✅ Критичний CSS inline для LCP -->
+  <style>
+    /* Critical CSS для mobile LCP */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Georgia, serif;
+      background: #f5f5f5 url('https://s1.hostingkartinok.com/uploads/images/2024/06/f1c0b6d6eb074470c17b4362cd757fd2.jpg') center/cover no-repeat fixed;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #333;
+      font-display: swap;
+    }
+    
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 50px;
+      max-width: 900px;
+      width: 100%;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      min-height: 400px;
+    }
+    
+    h1 {
+      font-size: 36px;
+      color: #333;
+      margin-bottom: 20px;
+      font-weight: normal;
+      line-height: 1.2;
+    }
+    
+    .subtitle {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+    
+    .lang-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+      min-height: 48px;
+    }
+    
+    .lang-btn-skeleton {
+      width: 140px;
+      height: 44px;
+      background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite;
+      border-radius: 8px;
+    }
+    
+    @keyframes skeleton-loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    .news-ticker {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px 30px;
+      border-radius: 12px;
+      margin-bottom: 40px;
+      min-height: 120px;
+    }
+    
+    .news-skeleton {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .news-skeleton-line {
+      height: 16px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      animation: skeleton-loading 1.5s infinite;
+    }
+    
+    @media (max-width: 600px) {
+      .container {
+        padding: 30px 20px;
+      }
+      
+      h1 {
+        font-size: 28px;
+      }
+      
+      .lang-btn-skeleton {
+        width: calc(50% - 8px);
+      }
+    }
+  </style>
+  
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- ✅ ТИМЧАСОВО: Форсовані стилі аудіоплеєра для усунення конфліктів -->
+  <style>
+    /* Якщо кнопки не відображаються - ці стилі їх форсують */
+    .audio-compact-container {
+      display: flex !important;
+      align-items: center !important;
+      gap: 15px !important;
+      padding: 15px !important;
+      background: #f8f9fa !important;
+      border-radius: 8px !important;
+      margin-bottom: 12px !important;
+    }
+    
+    .audio-compact-btn {
+      flex-shrink: 0 !important;
+      width: 44px !important;
+      height: 44px !important;
+      min-width: 44px !important;
+      border-radius: 50% !important;
+      border: none !important;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+      color: white !important;
+      font-size: 16px !important;
+      cursor: pointer !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      transition: all 0.3s ease !important;
+      box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3) !important;
+    }
+    
+    .audio-compact-btn:hover {
+      transform: scale(1.08) !important;
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.5) !important;
+    }
+    
+    .audio-icon {
+      display: inline-block !important;
+      line-height: 1 !important;
+    }
+    
+    .audio-compact-info {
+      flex: 1 !important;
+      min-width: 0 !important;
+    }
+    
+    .audio-compact-title {
+      font-weight: 600 !important;
+      font-size: 14px !important;
+      color: #333 !important;
+      margin-bottom: 6px !important;
+    }
+  </style>
+  
+  <!-- ✅ НОВОЕ: CSS для власної кнопки підтримки -->
+  <style>
+    /* Кнопка підтримки */
+    #support-button-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
+    
+    .support-floating-button {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #a67c52 0%, #8b6844 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(166, 124, 82, 0.3);
+      opacity: 0.88;
+      transition: all 0.3s ease;
+      max-width: 320px;
+      cursor: pointer;
+    }
+    
+    .support-floating-button:hover {
+      opacity: 1;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 25px rgba(166, 124, 82, 0.45);
+    }
+    
+    .support-icon {
+      font-size: 28px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    
+    .support-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      text-align: left;
+    }
+    
+    .support-title {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    
+    .support-text {
+      font-size: 13px;
+      line-height: 1.4;
+      opacity: 0.95;
+      font-weight: 400;
+    }
+    
+    html[dir="rtl"] #support-button-container {
+      right: auto;
+      left: 20px;
+    }
+    
+    html[dir="rtl"] .support-content {
+      text-align: right;
+    }
+    
+    @keyframes support-fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+      to {
+        opacity: 0.88;
+        transform: translateY(0) scale(1);
+      }
+    }
+    
+    #support-button-container {
+      animation: support-fade-in 0.6s ease-out 1.2s both;
+    }
+    
+    @media (max-width: 768px) {
+      #support-button-container {
+        bottom: 15px;
+        right: 15px;
+      }
+      
+      .support-floating-button {
+        padding: 14px 18px;
+        max-width: 280px;
+      }
+      
+      .support-icon {
+        font-size: 24px;
+      }
+      
+      .support-title {
+        font-size: 15px;
+      }
+      
+      .support-text {
+        font-size: 12px;
+      }
+      
+      html[dir="rtl"] #support-button-container {
+        left: 15px;
+        right: auto;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      #support-button-container {
+        bottom: 10px;
+        right: 10px;
+      }
+      
+      .support-floating-button {
+        padding: 12px 16px;
+        max-width: 240px;
+        gap: 10px;
+      }
+      
+      .support-icon {
+        font-size: 22px;
+      }
+      
+      .support-title {
+        font-size: 14px;
+      }
+      
+      .support-text {
+        font-size: 11px;
+        line-height: 1.3;
+      }
+      
+      html[dir="rtl"] #support-button-container {
+        left: 10px;
+        right: auto;
+      }
+    }
+    
+    @media (max-width: 360px) {
+      .support-floating-button {
+        max-width: 200px;
+        padding: 10px 14px;
+      }
+      
+      .support-text {
+        display: none;
+      }
+    }
+  </style>
+  
+  <!-- ✅ CSP з підтримкою всіх необхідних ресурсів -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    img-src 'self' https: data: blob:;
+    font-src 'self' data: https://fonts.gstatic.com;
+    frame-src 
+      https://www.youtube.com 
+      https://www.youtube-nocookie.com 
+      https://youtube.com
+      https://w.soundcloud.com 
+      https://soundcloud.com;
+    media-src 'self' https: blob: data:;
+    connect-src 
+      'self' 
+      https://mostovoy.goatcounter.com 
+      https://archive.org 
+      https://*.archive.org
+      blob: 
+      data:;
+  ">
+  
+  <!-- GoatCounter Analytics -->
+  <script>
+    (function() {
+      var img = new Image();
+      img.src = 'https://mostovoy.goatcounter.com/count?p=' + 
+                encodeURIComponent(location.pathname + location.search) +
+                '&t=' + encodeURIComponent(document.title) +
+                '&r=' + encodeURIComponent(document.referrer);
+    })();
+  </script>
+  
+  <noscript>
+    <img src="https://mostovoy.goatcounter.com/count?p=/index" 
+         alt="" 
+         style="position:absolute; width:1px; height:1px; top:-9999px;">
+  </noscript>
+</head>
+<body>
+
+<div class="container">
+  <h1 id="mainTitle">Слава Мостовий: Вірші, Музика, Відео</h1>
+  <p class="subtitle" id="subtitle">Поєднання слів і звуків: світ моєї творчості</p>
+  
+  <div class="lang-buttons" id="langButtons">
+    <div class="lang-btn-skeleton"></div>
+    <div class="lang-btn-skeleton"></div>
+    <div class="lang-btn-skeleton"></div>
+    <div class="lang-btn-skeleton"></div>
+  </div>
+  
+  <div class="news-ticker" id="newsTicker">
+    <h3 id="newsTitle">Новини</h3>
+    <div id="newsContent">
+      <div class="news-skeleton">
+        <div class="news-skeleton-line"></div>
+        <div class="news-skeleton-line"></div>
+        <div class="news-skeleton-line"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ПОЕЗІЯ -->
+  <div class="section">
+    <h2 id="poetryTitle">Поезія</h2>
+    <p id="poetryText" dir="auto"></p>
+    <div style="margin-top: 15px;">
+      <button class="btn-view-all" onclick="ModalManager.openPoetryModal()" id="viewPoetryBtn">📖 Переглянути колекцію</button>
+      <a href="https://stihi.ru/avtor/slvm3" target="_blank" class="view-all-link" id="poetryExternalLink">🔗 Повна колекція на Stihi.ru</a>
+    </div>
+  </div>
+  
+  <!-- МУЗИКА -->
+  <div class="section">
+    <h2 id="musicTitle">Музика</h2>
+    <div id="musicContent">
+      <p id="musicText" dir="auto"></p>
+      <div style="margin-top: 15px;">
+        <button class="btn-view-all" onclick="ModalManager.openMusicModal()" id="openMusicModalBtn">🎵 Мої композиції</button>
+        <a href="https://soundcloud.com/slava-mostovoy" target="_blank" class="view-all-link" id="musicExternalLink">🔗 Повна колекція на SoundCloud</a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ВІДЕО -->
+  <div class="section">
+    <h2 id="videoTitle">Відео</h2>
+    <div id="videoContent">
+      <p id="videoText" dir="auto"></p>
+      <div style="margin-top: 15px;">
+        <button class="btn-view-all" onclick="ModalManager.openVideoModal()" id="openVideoModalBtn">🎬 Мої відео</button>
+        <a href="https://www.youtube.com/@slvm3" target="_blank" class="view-all-link" id="videoExternalLink">🔗 Всі відео на YouTube</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2 id="followTitle">Слідкуйте за новими публікаціями</h2>
+    <p id="followText" dir="auto"></p>
+  </div>
+  
+  <div class="footer">
+    © 2024–2025 Слава Мостовий
+  </div>
+</div>
+
+<!-- ✅ НОВОЕ: Контейнер для власної кнопки підтримки -->
+<div id="support-button-container"></div>
+
+<!-- МОДАЛЬНІ ВІКНА -->
+
+<!-- Модалка музики -->
+<div class="modal" id="musicModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="musicModalTitle">🎵 Мої композиції</h2>
+      <button class="close-btn" id="closeMusicModalBtn">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="musicModalList"></div>
+      <a href="https://soundcloud.com/slava-mostovoy" target="_blank" class="modal-link" id="musicModalLink">→ Мій профіль на SoundCloud</a>
+    </div>
+  </div>
+</div>
+
+<!-- Модалка відео -->
+<div class="modal" id="videoModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="videoModalTitle">🎬 Мої відео</h2>
+      <button class="close-btn" id="closeVideoModalBtn">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="videoModalList"></div>
+      <a href="https://www.youtube.com/@slvm3" target="_blank" class="modal-link" id="videoModalLink">→ Мій канал на YouTube</a>
+    </div>
+  </div>
+</div>
+
+<!-- Модалка поезії (список) -->
+<div class="modal" id="poetryModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="poetryModalTitle">📖 Моя поезія</h2>
+      <button class="close-btn" id="closePoetryModalBtn">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="margin-bottom: 15px;">
+        <input 
+          type="text" 
+          id="poetrySearchInput" 
+          placeholder="Пошук..." 
+          style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
+      </div>
+      
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #333;">
+          📚 <span id="poetryCollectionLabel">Збірка:</span>
+        </label>
+        <div id="poetryCollectionFilter" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px;">
+          <!-- Кнопки будуть згенеровані динамічно -->
+        </div>
+      </div>
+      
+      <div id="poetryListContainer"></div>
+      <a href="https://stihi.ru/avtor/slvm3" target="_blank" class="modal-link" id="poetryModalStihiLink">→ Мій профіль на Stihi.ru</a>
+    </div>
+  </div>
+</div>
+
+<!-- Модалка перегляду вірша -->
+<div class="modal" id="poemViewModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="poemViewTitle"></h2>
+      <button class="close-btn" id="closePoemViewBtn">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="poemViewContent" style="white-space: pre-wrap; line-height: 1.8;"></div>
+      <div id="poemTranslations" style="margin-top: 20px;"></div>
+      <button class="btn-view-all" id="backToPoemListBtn" style="margin-top: 20px;">← Назад до списку</button>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ КРИТИЧНО: КОЖЕН СКРИПТ ТІЛЬКИ ОДИН РАЗ! -->
+
+<!-- 1. УТИЛІТИ -->
+<script src="utils.js"></script>
+
+<!-- 2. КОНФІГУРАЦІЯ -->
+<script src="translations.js"></script>
+
+<!-- 3. ЗАВАНТАЖУВАЧ ДАНИХ -->
+<script src="dataLoader.js"></script>
+
+<!-- 4. АУДІОПЛЕЄР -->
+<script src="audioPlayer.js"></script>
+
+<!-- 5. МЕНЕДЖЕРИ (кожен ОДИН раз!) -->
+<script src="languageManager.js"></script>
+<script src="mediaManager.js"></script>
+<script src="modalManager.js"></script>
+<script src="uiManager.js"></script>
+
+<!-- 6. ГОЛОВНИЙ ФАЙЛ (ОСТАННІМ!) -->
+<script src="main.js"></script>
+
+<!-- ✅ ДІАГНОСТИКА АУДІОПЛЕЄРА (тимчасово для дебагу) -->
+<script>
+// Чекаємо поки все завантажиться
+setTimeout(() => {
+  console.log('');
+  console.log('🔍 === ДІАГНОСТИКА АУДІОПЛЕЄРА ===');
+  console.log('');
+  
+  // 1. Перевірка модулів
+  console.log('1️⃣ Модулі:');
+  console.log('   AudioPlayer:', typeof AudioPlayer !== 'undefined' ? '✅ завантажено' : '❌ НЕ ЗАВАНТАЖЕНО');
+  console.log('   MediaManager:', typeof MediaManager !== 'undefined' ? '✅ завантажено' : '❌ НЕ ЗАВАНТАЖЕНО');
+  console.log('   detectAudioType:', typeof detectAudioType !== 'undefined' ? '✅ завантажено' : '❌ НЕ ЗАВАНТАЖЕНО');
+  console.log('');
+  
+  // 2. Тест створення плеєра
+  if (typeof AudioPlayer !== 'undefined' && typeof AudioPlayer.createPlayer === 'function') {
+    console.log('2️⃣ Тест createPlayer():');
+    const testTrack = { title: 'Test', audio: 'https://example.com/test.mp3' };
+    try {
+      const html = AudioPlayer.createPlayer(testTrack);
+      console.log('   HTML створено:', html.length > 0 ? '✅' : '❌');
+      console.log('   Містить .audio-compact-btn:', html.includes('audio-compact-btn') ? '✅' : '❌');
+    } catch (e) {
+      console.error('   ❌ Помилка:', e.message);
+    }
+    console.log('');
+  }
+  
+  // 3. Перевірка DOM
+  console.log('3️⃣ DOM елементи:');
+  const musicModal = document.getElementById('musicModalList');
+  console.log('   #musicModalList:', musicModal ? '✅' : '❌');
+  
+  if (musicModal) {
+    const buttons = musicModal.querySelectorAll('.audio-compact-btn');
+    console.log('   Кнопок .audio-compact-btn:', buttons.length);
+    
+    if (buttons.length > 0) {
+      const btn = buttons[0];
+      const styles = window.getComputedStyle(btn);
+      console.log('   Перша кнопка:');
+      console.log('     display:', styles.display);
+      console.log('     width:', styles.width);
+      console.log('     height:', styles.height);
+      console.log('     visibility:', styles.visibility);
+      console.log('     opacity:', styles.opacity);
+      console.log('');
+      
+      if (styles.display === 'none' || styles.width === '0px' || styles.opacity === '0') {
+        console.error('   ⚠️ ПРОБЛЕМА: Кнопка існує але невидима!');
+        console.log('   💡 Можлива причина: конфлікт CSS стилів');
+      }
+    } else {
+      console.error('   ⚠️ ПРОБЛЕМА: Кнопки не створені!');
+      console.log('   💡 HTML модального вікна (перші 500 символів):');
+      console.log('   ', musicModal.innerHTML.substring(0, 500));
+    }
+  }
+  
+  console.log('');
+  console.log('🔍 === КІНЕЦЬ ДІАГНОСТИКИ ===');
+  console.log('');
+  console.log('💡 Якщо бачите ❌ - надішліть цей вивод розробнику');
+}, 2000);
+</script>
+
+</body>
+</html>
